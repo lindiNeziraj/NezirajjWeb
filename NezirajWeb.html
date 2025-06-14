@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NezirajWeb</title>
+    <style>
+        /* ===== CSS ===== */
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4d44db;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray: #718096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: var(--secondary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Services */
+        .services {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .info-item i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            margin: 0 10px;
+            line-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: all 0.3s ease;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px auto;
+                max-width: 200px;
+            }
+        }
+    </style>
+    <!-- Font Awesome për ikona -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Neziraj<span>Web</span></a>
+
+            <nav>
+                <ul id="main-nav">
+                    <li><a href="http://localhost:63342/Module26/Kryefaqe.html?_ijt=psbt9qr634s9qh6fv3ge1nhtk9&_ij_reload=RELOAD_ON_SAVE">Kryefaqja</a></li>
+                    <li><a href="http://localhost:63342/Module26/Rreth%20Nesh.html?_ijt=k9tuhj0bd04hp1a6iis0hfmj9v&_ij_reload=RELOAD_ON_SAVE">Rreth Nesh</a></li>
+                    <li><a href="http://localhost:63342/Module26/Sherbimet.html?_ijt=21jscmmviil2m2bvskjee4tr4p&_ij_reload=RELOAD_ON_SAVE">Shërbimet</a></li>
+                    <li><a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE">Kontakt</a></li>
+                    <li><a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE">Paguaj Online</a></li>
+                    <li><a href="http://localhost:63342/Module26/Reklamat%20Tona.html?_ijt=vctl9polqke5r8j39soojftopl&_ij_reload=RELOAD_ON_SAVE">Reklamat Tona</a></li>
+                </ul>
+            </nav>
+
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Zgjidhje Profesionale për Biznesin Tuaj</h1>
+            <p>Ne ofrojmë shërbime të avancuara për të ndihmuar biznesin tuaj të rritet në treg</p>
+            <div>
+                <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Kontaktoni</a>
+                <a href="#services" class="btn btn-outline">Shërbimet</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Rreth Nesh</h2>
+                <p>Njohuni me ekipin dhe ekspertizën tonë</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>4 Vjet Përvojë në Industrinë</h3>
+                    <p>Ne jemi një ekip i përkushtuar profesionistësh me një pasion për të krijuar zgjidhje inovative për bizneset tona.</p>
+                    <p>Qëllimi ynë është të ofrojmë shërbime me cilësi të lartë që ndihmojnë klientët tanë të arrijnë objektivat e tyre biznesore.</p>
+                    <a href="#services" class="btn">Shihni Shërbimet</a>
+                </div>
+
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ekipi ynë">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shërbimet Tona</h2>
+                <p>Zgjidhje të personalizuara për çdo nevojë</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Zhvillim Web</h3>
+                    <p>Faqe web moderne dhe responsive të dizajnuara për konvertim maksimal.</p>
+                    <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Kontaktoni Tani!</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Aplikacione Mobile</h3>
+                    <p>Aplikacione native dhe cross-platform për iOS dhe Android.</p>
+                    <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Kontaktoni Tani!</a>
+                </div>
+
+                 <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-wordpress"></i>
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <h3>Dizajn me Wordpress</h3>
+                    <p>Dizajnimet me Wordpress jane shum te kerkuar tani per tani.</p>
+                    <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Kontaktoni Tani!</a>
+                </div>
+
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-html5"></i>
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3>Kodim me Html dhe Css</h3>
+                    <p>Kodimi me Html dhe Css edhe shum i vlefshem per dizajne profosionale.</p>
+                    <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Na Kontaktoni Tani!</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3>Python esht nje gjuhe programimi e fuqishme dhe e lehtë për t'u mësuar</h3>
+                    <p>Python është një nga gjuhët më të njohura të programimit, e përdorur në zhvillim softuerik, shkencë të të dhënave dhe më shumë.</p>
+                     <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Na Kontaktoni Tani!</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Marketing Digjital</h3>
+                    <p>Strategji të synuara për rritjen e pranisë suaj online.</p>
+                    <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Kontaktoni Tani!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="footer-links">
+                <a href="http://localhost:63342/Module26/Kryefaqe.html?_ijt=psbt9qr634s9qh6fv3ge1nhtk9&_ij_reload=RELOAD_ON_SAVE">Kryefaqja</a>
+                <a href="http://localhost:63342/Module26/Rreth%20Nesh.html?_ijt=k9tuhj0bd04hp1a6iis0hfmj9v&_ij_reload=RELOAD_ON_SAVE">Rreth Nesh</a>
+                <a href="#services">Shërbimet</a>
+                <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE">Kontakt</a>
+            </div>
+
+            <p>&copy; 2025 Biznesi Im. Të gjitha të drejtat e rezervuara.</p>
+        </div>
+    </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // 1. Menu Toggle për Mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-times');
+                icon.classList.toggle('fa-bars');
+            }
+        });
+    }
+
+    // 2. Përmirësimi i Buttonave
+    function enhanceButtons() {
+        const buttons = document.querySelectorAll('.btn');
+
+        buttons.forEach(button => {
+            // Stilizim dinamik për butona
+            button.style.transition = 'all 0.3s ease';
+            button.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+
+            // Efekte hover
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 7px 14px rgba(0,0,0,0.15)';
+            });
+
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            });
+
+            // Efekte klikimi
+            button.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(1px)';
+            });
+
+            button.addEventListener('mouseup', function() {
+                this.style.transform = 'translateY(-3px)';
+            });
+        });
+    }
+
+    // 3. Përmirësimi i Kartave të Shërbimeve
+    function enhanceServiceCards() {
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        serviceCards.forEach(card => {
+            // Stilizim dinamik
+            card.style.transition = 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
+
+            // Efekte hover
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
+
+                const icon = this.querySelector('.service-icon');
+                if (icon) {
+                    icon.style.transform = 'rotate(10deg) scale(1.05)';
+                }
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)';
+
+                const icon = this.querySelector('.service-icon');
+                if (icon) {
+                    icon.style.transform = 'rotate(0) scale(1)';
+                }
+            });
+        });
+    }
+
+    // 4. Header Dinamik kur Scrollohet
+    function setupDynamicHeader() {
+        const header = document.querySelector('header');
+        if (!header) return;
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.padding = '10px 0';
+            } else {
+                header.style.backgroundColor = 'white';
+                header.style.padding = '15px 0';
+            }
+        });
+    }
+
+    // 5. Smooth Scrolling për Anchor Links
+    function setupSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Mbyll menunë nëse është hapur (për mobile)
+                    if (mainNav && mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        if (icon) {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    }
+                }
+            });
+        });
+    }
+
+    // 6. Animacione kur Elementet Shfaqen në Ekran
+    function setupScrollAnimations() {
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.about, .services, .contact, .section-title, .service-card');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementPosition < windowHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Vendosim stil fillestar për animacion
+        const sections = document.querySelectorAll('.about, .services, .contact');
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        });
+
+        const titlesAndCards = document.querySelectorAll('.section-title, .service-card');
+        titlesAndCards.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Ekzekutohet menjëherë
+    }
+
+    // 7. Përditësim Automatik i Vitit në Footer
+    function updateFooterYear() {
+        const footerText = document.querySelector('footer p');
+        if (footerText) {
+            const currentYear = new Date().getFullYear();
+            footerText.textContent = footerText.textContent.replace(/2023|2024/g, currentYear);
+        }
+    }
+
+    // Ekzekutojmë të gjitha funksionet
+    enhanceButtons();
+    enhanceServiceCards();
+    setupDynamicHeader();
+    setupSmoothScrolling();
+    setupScrollAnimations();
+    updateFooterYear();
+
+    // 8. Butoni Scroll-to-Top
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollToTopBtn.style.position = 'fixed';
+    scrollToTopBtn.style.bottom = '20px';
+    scrollToTopBtn.style.right = '20px';
+    scrollToTopBtn.style.width = '50px';
+    scrollToTopBtn.style.height = '50px';
+    scrollToTopBtn.style.borderRadius = '50%';
+    scrollToTopBtn.style.backgroundColor = 'var(--primary)';
+    scrollToTopBtn.style.color = 'white';
+    scrollToTopBtn.style.border = 'none';
+    scrollToTopBtn.style.cursor = 'pointer';
+    scrollToTopBtn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    scrollToTopBtn.style.zIndex = '999';
+    scrollToTopBtn.style.display = 'none';
+    scrollToTopBtn.style.alignItems = 'center';
+    scrollToTopBtn.style.justifyContent = 'center';
+    scrollToTopBtn.style.fontSize = '1.2rem';
+
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.style.display = 'flex';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+
+    document.body.appendChild(scrollToTopBtn);
+});
+</script>
+
+
+
+</body>
+</html>
