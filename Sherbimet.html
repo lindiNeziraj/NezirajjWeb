@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emri i Kompanisë - Shërbimet Tona</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== CSS Reset ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        /* ========== Header & Navigation ========== */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1672309046475-4cce2039f342?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ========== Services Section ========== */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .price {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin: 1rem 0;
+        }
+
+        /* ========== About Section ========== */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* ========== Testimonials ========== */
+        .testimonials {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                        url('https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--secondary);
+        }
+
+        /* ========== Contact Section ========== */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+        }
+
+        /* ========== Footer ========== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* ========== Modal ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* ========== Animations ========== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== Responsive Design ========== */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+
+
+
+
+
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <div class="logo">Neziraj Web</div>
+            <ul class="nav-links">
+                <li><a href="http://localhost:63342/Module26/Kontakto%20Sherbimet%20Tona.html?_ijt=d8upaqrs91tmq1fm6issd2ptpk&_ij_reload=RELOAD_ON_SAVE">Shërbimet</a></li>
+                <li><a href="http://localhost:63342/Module26/Rreth%20Nesh.html?_ijt=k9tuhj0bd04hp1a6iis0hfmj9v&_ij_reload=RELOAD_ON_SAVE">Rreth Nesh</a></li>
+                <li><a href="#testimonials">Komente</a></li>
+                <li><a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE">Kontakt</a></li>
+            </ul>
+        </nav>
+
+
+
+        <div class="hero-content">
+            <h1>Zgjidhje Profesionale për Biznesin Tuaj</h1>
+            <p>Ne ofrojmë shërbime të cilësisë së lartë me ekipin tonë të ekspertëve me përvojë mbi 10 vjet në industri.</p>
+            <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Kontaktoni Ne</a>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shërbimet Tona</h2>
+                <p>Zgjidhje të personalizuara për nevojat tuaja</p>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Web Development">
+                    </div>
+                    <div class="service-content">
+                        <h3>Zhvillim Web</h3>
+                        <p>Faqe interneti moderne, të shpejta dhe të optimizuara për SEO me teknologjitë më të fundit.</p>
+                        <span class="price">Nga €600</span>
+                        <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Na Kontaktoni Tani Per Kete Porosi!</a>
+                    </div>
+                </div>
+
+
+
+
+
+
+          <div class="service-card">
+        <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1566207462754-97c86c31db3d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dizajn Me Wordpress">
+        </div>
+        <div class="service-content">
+            <h3>Dizajn Me Wordpress</h3>
+            <p>Dizajnet me Wordpress kan shum dobi sepse ska nevoj per kode kshtuqe eshte me lehte per perdorim.</p>
+            <span class="price">Nga €800</span>
+            <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Na Kontaktoni Tani Per kete Porosi!</a>
+        </div>
+    </div>
+
+
+
+
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Graphic Design">
+                    </div>
+                    <div class="service-content">
+                        <h3>Dizajn Grafike</h3>
+                        <p>Logo unike, branding i përputhshëm dhe materiale promocionale profesionale.</p>
+                        <span class="price">Nga €300</span>
+                        <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Na Kontaktoni Tani Per Kete Porosi!</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1648134859211-4a1b57575f4e?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Full Website">
+                    </div>
+                    <div class="service-content">
+                        <h3>Website te Plote me Html, Css, dhe JavaScript</h3>
+                        <p>Full website with more than 6 pages or more using Html, Css, JavaScript codes</p>
+                        <span class="price">700 deri ne 1000+</span>
+                        <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Na Kontaktoni Tani Per Kete Porosi!</a>
+                    </div>
+                </div>
+
+
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Digital Marketing">
+                    </div>
+                    <div class="service-content">
+                        <h3>Marketing Digital</h3>
+                        <p>Strategji marketingu për rritjen e pranisë online dhe konvertimin e klientëve.</p>
+                        <span class="price">Nga €700</span>
+                        <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Na Kontaktoni Tani Per Kete Porosi!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ekipi ynë">
+                </div>
+                <div class="about-text">
+                    <h3>Rreth Nesh</h3>
+                    <p>Ne jemi një ekip i përkushtuar profesionistësh me përvojë të gjerë në industri. Që nga themelimi ynë në vitin 2010, kemi ndihmuar mbi 500 klientë të arrijnë objektivat e tyre dixhitale.</p>
+                    <p>Misioni ynë është të ofrojmë zgjidhje inovative dhe të përshtatura për çdo biznes, duke garantuar cilësinë më të lartë dhe kënaqësinë e plotë të klientit.</p>
+                    <a href="http://localhost:63342/Module26/Porosit%20Online.html?_ijt=rt6tc0vul5m26v7qfhvev5rb0d&_ij_reload=RELOAD_ON_SAVE" class="btn">Mësoni Më Shumë</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Çfarë Thonë Klientët Tanë</h2>
+                <p>Opinione të vërteta nga klientët tanë të kënaqur</p>
+            </div>
+
+
+
+
+
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Klienti 1">
+                    <h4>Anisa Krasniqi</h4>
+                    <p>"Faqja e internetit që ndërtuan për ne tejkalu të gjitha pritshmëritë tona. Profesionalizmi dhe përgjegjshmëria e tyre është e jashtëzakonshme."</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Klienti 2">
+                    <h4>Bekim Hoxha</h4>
+                    <p>"Kampanja e marketingut digital që realizuan për ne solli një rritje prej 200% në shitje. Absolutisht të kënaqur me rezultatet!"</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>NezirajWeb</h3>
+            <p>Zgjidhje profesionale për nevojat tuaja dixhitale</p>
+
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <p>&copy; 2025 NezirajWeb. Të gjitha të drejtat e rezervuara.</p>
+        </div>
+    </footer>
+
+
+
+    <script>
+        // Order Modal Functionality
+        const orderModal = document.getElementById('orderModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const orderBtns = document.querySelectorAll('.order-btn');
+        const orderForm = document.getElementById('orderForm');
+        const confirmation = document.getElementById('confirmation');
+
+        // Open modal when order button is clicked
+        orderBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const service = btn.getAttribute('data-service');
+                document.getElementById('selectedService').value = service;
+                document.querySelector('#orderModal h2').textContent = `Porosit ${service}`;
+                orderModal.style.display = 'flex';
+            });
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', () => {
+            orderModal.style.display = 'none';
+        });
+
+        // Form submission
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Here you would normally send the data to your server
+            // For demo purposes, we'll just show the confirmation
+            orderForm.style.display = 'none';
+            confirmation.style.display = 'block';
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                orderForm.reset();
+                orderForm.style.display = 'block';
+                confirmation.style.display = 'none';
+                orderModal.style.display = 'none';
+            }, 3000);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === orderModal) {
+                orderModal.style.display = 'none';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+
+
+
+
+
+
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
