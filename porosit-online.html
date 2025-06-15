@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NezirajWeb - Porosi & Pagesa Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #10b981;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        .form-container {
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 120px;
+        }
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #3a56d4;
+        }
+        .service-info {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .confirmation {
+            display: none;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            margin-top: 20px;
+            text-align: center;
+        }
+        .payment-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Porositë Online</h1>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Emri*</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email*</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Telefoni*</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Lloji i Kërkesës*</label>
+                    <select id="requestType" required>
+                        <option value="" disabled selected>Zgjidhni...</option>
+                        <option value="porosi">Porosi</option>
+                        <option value="pyetje">Pyetje</option>
+                        <option value="bashkepunim">Bashkëpunim</option>
+                    </select>
+                </div>
+
+                <!-- Shfaq vetëm nëse është POROSI -->
+                <div id="serviceSection" style="display: none;">
+                    <div class="form-group">
+                        <label>Shërbimi*</label>
+                        <select id="service" required>
+                            <option value="" disabled selected>Zgjidhni...</option>
+                            <option value="dizajn">Dizajn Webfaqeje - 700€</option>
+                            <option value="ecommerce">Dyqan Online - 1200€</option>
+                            <option value="landing">Landing Page - 400€</option>
+                            <option value="landing">Dizajn Profosionist me Wordpres - 800€</option>
+                            <option value="landing">WebFaqe Me Streamlit 300 deri 400</option>
+                            <option value="landing">Logo profosionale 100 deri 300</option>
+                            <option value="landing">Kontakt </option>
+                             <option value="logo" title="Logo unike dhe profesionale për biznesin tuaj.">Logo Profesionale - 80€ - 250€</option>
+                            <option value="seo" title="Optimizim bazik për motorët e kërkimit.">SEO Bazik - 150€ - 350€</option>
+                            <option value="socialmedia" title="Menaxhim dhe strategji për rrjetet sociale.">Menaxhim Rrjetesh Sociale - 200€ - 500€</option>
+                            <option value="maintenance" title="Mbështetje dhe mirëmbajtje mujore.">Mbështetje dhe Mirëmbajtje - 50€ - 150€</option>
+                            <option value="emailmarketing" title="Fushata email dhe newsletter.">Email Marketing - 300€ - 600€</option>
+                            <option value="photography" title="Fotografi ose video për webfaqe.">Fotografi / Video për web - 300€ - 1000€</option>
+                            <option value="apiintegration" title="Integrim me API dhe sisteme të tjera.">Integrim me API dhe Apps - 400€ - 1200€</option>
+                            <option value="membership" title="Faqe me anëtarësi dhe zona të dedikuara.">Faqe me Anëtarësi / Login - 800€ - 1300€</option>
+                            <option value="consulting" title="Konsulencë IT dhe strategji teknologjike.">Konsulencë IT dhe Strategji - 100€ - 300€/seancë</option>
+                            <option value="kontakt" title="Kontakto për konsultim falas.">Kontakt / Konsultim Falas</option>
+                            <option value="" disabled selected>Zgjidhni shërbimin...</option>
+                            <option value="branding" title="Krijim identiteti unik për biznesin tuaj.">Branding dhe Identitet Vizual - 500€ - 1000€</option>
+                            <option value="mobileapp" title="Zhvillim aplikacioni për Android dhe iOS.">Aplikacion Mobil - 1500€ - 4000€</option>
+                            <option value="contentcreation" title="Krijim përmbajtje profesionale për faqen ose rrjetet sociale.">Krijim Përmbajtjeje - 300€ - 700€</option>
+                            <option value="emailsetup" title="Konfigurim sistemesh email për biznesin tuaj.">Konfigurim Sistemi Email - 100€ - 250€</option>
+                            <option value="chatbot" title="Implementim chatbot për ndihmë klientësh në webfaqe.">Chatbot për Website - 400€ - 800€</option>
+                            <option value="webperformance" title="Optimizim shpejtësie dhe performancë për faqen.">Optimizim Performancë Web - 200€ - 500€</option>
+                            <option value="securityaudit" title="Auditim dhe përmirësim sigurie në website dhe sisteme.">Audit Sigurie - 300€ - 700€</option>
+                            <option value="customsoftware" title="Zhvillim software sipas nevojave të biznesit.">Software i Personalizuar - 2000€+ </option>
+                            <option value="virtualtour" title="Krijim vizitash virtuale 360° për ambiente ose produkte.">Vizita Virtuale 360° - 800€ - 1500€</option>
+                            <option value="uxui" title="Dizajn i përvojës dhe ndërfaqes së përdoruesit.">Dizajn UX/UI - 600€ - 1200€</option>
+                            <option value="socialgrowth" title="Strategji për rritjen e ndjekësve dhe ndikimit në rrjete sociale.">Rritje Ndjekësish në Social Media - 150€ - 400€</option>
+                            <option value="videoads" title="Produksion video për reklama online dhe rrjete sociale.">Produksion Video Reklamash - 500€ - 1300€</option>
+                            <option value="copywriting" title="Tekste kreative dhe të optimizuara për marketing.">Copywriting Marketingu - 200€ - 600€</option>
+                            <option value="crm" title="Implementim dhe konfigurim CRM për menaxhim klientësh.">CRM për Biznes - 1000€ - 3000€</option>
+                            <option value="analyticssetup" title="Konfigurim Google Analytics dhe raportim.">Setup Google Analytics - 150€ - 350€</option>
+                            <option value="blogsetup" title="Krijim dhe konfigurim blogu me dizajn personal.">Krijim Blogu Personal - 350€ - 600€</option>
+                            <option value="newsletter" title="Dizajn dhe dërgim newsletter-e me përmbajtje profesionale.">Newsletter dhe Email Campaign - 250€ - 500€</option>
+                            <option value="multilingual" title="Faqe në disa gjuhë për të arritur audienca të ndryshme.">Faqe Multigjuhëshe - 700€ - 1100€</option>
+                            <option value="podcast" title="Produksion dhe montim episodesh podcast.">Produksion Podcast - 400€ - 800€</option>
+                            <option value="affiliate" title="Integrim programi affiliate për shitje dhe marketing.">Program Affiliate - 600€ - 1000€</option>
+                            <option value="kontakt" title="Kontakto për bisedë dhe ofertë të personalizuar.">Kontakt / Oferta Personalizuar</option>
+                        </select>
+                    </div>
+                    <div class="service-info">
+                        <p><strong>Çmimi:</strong> <span id="servicePrice">0€</span></p>
+                        <p><strong>Përshkrimi:</strong> <span id="serviceDescription">Zgjidhni një shërbim</span></p>
+                    </div>
+                    <div class="payment-section">
+                        <label>Metoda e Pagesës*</label>
+                        <select id="paymentMethod" required>
+                            <option value="bpb-card">Kartë VISA/Mastercard (BPB)</option>
+                            <option value="bpb-transfer">Transfertë Bankare (BPB)</option>
+                        </select>
+                        <div id="cardDetails" style="margin-top: 15px; display: none;">
+                            <input type="text" placeholder="Numri i Kartelës" class="card-input">
+                            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                <input type="text" placeholder="MM/YY" style="width: 50%;">
+                                <input type="text" placeholder="CVV" style="width: 50%;">
+                            </div>
+                        </div>
+                        <div id="bankDetails" style="margin-top: 15px; display: none;">
+                            <p><strong>Transferta Bankare:</strong></p>
+                            <p>Banka: <strong>BPB Bank</strong></p>
+                            <p>Llogaria: <strong>NEZIRAJ WEB SH.P.K</strong></p>
+                            <p>IBAN: <strong>AL00 0000 0000 0000 0000 0000 0000</strong></p>
+                            <p><em>Ju lutem përdorni emrin tuaj si referencë.</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Mesazhi*</label>
+                    <textarea id="message" required></textarea>
+                </div>
+
+                <button type="submit">Dërgo Porosinë</button>
+            </form>
+
+            <div id="confirmation" class="confirmation">
+                <h3>✅ Porosia u dërgua me sukses!</h3>
+                <p>Do të ju kontaktojmë shumë shpejt.</p>
+                <p id="deliveryInfo"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializo EmailJS
+        emailjs.init('9VSNjWMQZpBM3mmOh');
+
+        // Shërbimet dhe çmimet
+        const services = {
+            "dizajn": { price: 700, desc: "Dizajn profesional i webfaqes" },
+            "ecommerce": { price: 1200, desc: "Dyqan online me pagesë" },
+            "landing": { price: 400, desc: "Faqe promocionale" }
+        };
+
+        // Kontrollo llojin e kërkesës
+        document.getElementById('requestType').addEventListener('change', function() {
+            const isOrder = (this.value === 'porosi');
+            document.getElementById('serviceSection').style.display = isOrder ? 'block' : 'none';
+        });
+
+        // Ndrysho çmimin kur zgjedhet shërbimi
+        document.getElementById('service').addEventListener('change', function() {
+            const selected = this.value;
+            if (selected && services[selected]) {
+                document.getElementById('servicePrice').textContent = `${services[selected].price}€`;
+                document.getElementById('serviceDescription').textContent = services[selected].desc;
+            }
+        });
+
+        // Ndrysho detajet e pagesës
+        document.getElementById('paymentMethod').addEventListener('change', function() {
+            const method = this.value;
+            document.getElementById('cardDetails').style.display = (method === 'bpb-card') ? 'block' : 'none';
+            document.getElementById('bankDetails').style.display = (method === 'bpb-transfer') ? 'block' : 'none';
+        });
+
+        // Dërgo formën
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            sendOrder();
+        });
+
+        // Dërgo porosinë
+        function sendOrder() {
+            const requestType = document.getElementById('requestType').value;
+            const isOrder = (requestType === 'porosi');
+            const service = isOrder ? document.getElementById('service').value : null;
+            const paymentMethod = isOrder ? document.getElementById('paymentMethod').value : null;
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                requestType: requestType,
+                service: isOrder ? services[service].desc : null,
+                price: isOrder ? services[service].price : null,
+                paymentMethod: paymentMethod,
+                message: document.getElementById('message').value
+            };
+
+            // Dërgo email me EmailJS
+            emailjs.send('service_958jk57', 'template_5ns7nbt', {
+                to_email: 'lindijonn@gmail.com',
+                from_name: formData.name,
+                from_email: formData.email,
+                subject: `Kërkesë e re: ${formData.requestType}`,
+                message: `
+                    Emri: ${formData.name}
+                    Email: ${formData.email}
+                    Telefoni: ${formData.phone}
+                    Lloji: ${formData.requestType}
+                    ${formData.service ? `Shërbimi: ${formData.service} (${formData.price}€)` : ''}
+                    ${formData.paymentMethod ? `Pagesa: ${formData.paymentMethod}` : ''}
+
+                    Mesazhi:
+                    ${formData.message}
+                `
+            }).then(() => {
+                // Shfaq konfirmimin
+                document.getElementById('confirmation').style.display = 'block';
+                document.getElementById('deliveryInfo').textContent =
+                    isOrder ? "Pagesa do të verifikohet brenda 24 orëve." : "Do të ju përgjigjemi brenda 1 dite.";
+                document.getElementById('contactForm').reset();
+            }).catch(error => {
+                alert("Gabim në dërgimin e email-it. Ju lutem provoni përsëri.");
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
